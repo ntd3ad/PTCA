@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ПТЦА ДЗ</title>
+</head>
+<body>
+    <header>
+        <h1>Игра "Орел и Решка"</h1>
+    </header>
+    <div>
+        <h2>Условие победы: два  раза выпадает "орел" или два раза выпадает "решка".</h2>
+        <label for="inputNum"><h3>Введите количество партий: </h3></label>
+        <input type="text" id="inputNum" name="inputNum" required minlength="4" maxlength="8" size="10">
+    </div>
+
+    <!-- Add id to image -->
+    <div>
+        <output name="firstPlayer" ></output>  <!-- Место для вывода результата (как я вижу: сверху строка "Результаты бросков" (добавлю)-> -->
+        <output name="secondPlayer" ></output>
+        <output name="resultOfGame" ></output> <!--  в выводе две строки о/р и тд, и сообщение о победе для пользователя "Победа"/"Проигрыш" )-->
+    </div>
+
+    <button id="next" onclick="show()">ввод</button>
+
+    <div class="image" style="display: none;">
+        <img width ="500" height="300" src="coin_flip.gif">
+        <img width ="500" height="300" src="rotate_coin.gif">
+    </div>
+
+        <script> /* При необходимости можем скрпит в отдельный файл закинуть*/
+            function show() { /* Функция с анимациями бросков*/
+                document.getElementById('next').style.display = 'inline';
+                document.getElementsByClassName('image')[0].style.display = 'block';
+                setTimeout(hide, 1400);
+                function hide() {
+                    document.getElementById('next').style.display = 'block';
+                    document.getElementsByClassName('image')[0].style.display = 'none';
+                }
+            }
+        </script>
+
+</body>
+</html>
