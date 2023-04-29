@@ -31,18 +31,16 @@
     <div class="container d-flex justify-content-center">
       <div class="row justify-content-center">
         <div class="col-4 image" style="display: none;">
-
-                <img src="images/coin_flip.gif">
-
+            <img id="coin" src="images/coin_flip.gif">
         </div>
         <div class="col justify-content-center">
             <table class="table table-bordered" style="display: none;" >
                 <thead>
                     <tr>
-                      <th scope="col-1">#</th>
-                      <th scope="col-1">First</th>
-                      <th scope="col-1">Last</th>
-                      <th scope="col-1">Handle</th>
+                      <th scope="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -67,27 +65,28 @@
             </table>
         </div>
         <div class="col-4 image" style="display: none;">
-                <img src="images/rotate_coin.gif">
+                <img id = "coin" src="images/rotate_coin.gif">
         </div>
     </div>
     </div>
-
-
 
         <script> /* При необходимости можем скрпит в отдельный файл закинуть*/
             function show() { /* Функция с анимациями бросков*/
                 document.getElementById('next').style.display = 'inline';
                 document.getElementsByClassName('image')[0].style.display = 'block';
+
                 setTimeout(hide, 1400);
                 document.getElementsByClassName('table')[0].style.display = 'block';
 
                 document.getElementsByClassName('image')[1].style.display = 'block';
-
                 setTimeout(hide, 1400);
+
                 function hide() {
                     document.getElementById('next').style.display = 'block';
-                    document.getElementsByClassName('image')[0].style.display = 'none';
-                    document.getElementsByClassName('image')[1].style.display = 'none';
+                    document.getElementsByClassName('image')[0].style.display = 'block';
+                    document.getElementsByClassName('image')[0].style.visibility = "hidden";
+                    document.getElementsByClassName('image')[1].style.display = 'block';
+                    document.getElementsByClassName('image')[1].style.visibility = "hidden";
                 }
             }
         </script>
