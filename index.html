@@ -14,17 +14,12 @@
         <h1>Игра "Орел и Решка"</h1>
     </header>
     <div>
-        <h2>Условие победы: два  раза выпадает "орел" или два раза выпадает "решка".</h2>
-        <label for="inputNum"><h3>Введите количество партий: </h3></label>
-        <input type="text" id="inputNum" name="inputNum" required minlength="4" maxlength="8" size="10">
-    </div>
-
-    <!-- Add id to image -->
-    <div>
-        <output name="firstPlayer" ></output>  <!-- Место для вывода результата (как я вижу: сверху строка "Результаты бросков" (добавлю)-> -->
-        <output name="secondPlayer" ></output>
-        <output name="resultOfGame" ></output> <!--  в выводе две строки о/р и тд, и сообщение о победе для пользователя "Победа"/"Проигрыш" )-->
-    </div>
+      <h2>Условие победы: два  раза выпадает "орел" или два раза выпадает "решка".</h2>
+      <label for="inputNum"><h3>Введите количество партий: </h3></label>
+      <input type="text" id="inputNum" name="inputNum" required minlength="4" maxlength="8" size="10"><br />
+      <label for="leftNum"><h3>Осталось партий: </h3></label>
+      <input type="text" id="leftNum" name="leftNum" required minlength="4" maxlength="8" size="10" disabled="true" >
+  </div>
 
     <button id="next" onclick="show()">ввод</button>
 
@@ -33,36 +28,19 @@
         <div class="col-4 image" style="visibility: hidden;">
             <img id="coin" src="images/coin_flip.gif">
         </div>
-        <div class="col justify-content-center">
-            <table class="table table-bordered" style="visibility: hidden;" >
+        <div class="col-4 justify-content-center">
+
+              <table id="results" class="table table-bordered" style="visibility: hidden;  width: 100px;"  >
                 <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                      <th scope="col">Раунд №</th>
+                      <th scope="col">Пользователь</th>
+                      <th scope="col">Соперник</th>
+                      <th scope="col">Победитель</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                  </tbody>
             </table>
+
         </div>
         <div class="col-4 image" style="visibility: hidden;">
                 <img id = "coin" src="images/rotate_coin.gif">
@@ -70,25 +48,62 @@
     </div>
     </div>
 
-        <script> /* При необходимости можем скрпит в отдельный файл закинуть*/
-            function show() { /* Функция с анимациями бросков*/
-                document.getElementById('next').style.visibility = 'inline';
-                document.getElementsByClassName('image')[0].style.visibility = "visible";
-                document.getElementsByClassName('image')[1].style.visibility = "visible";
-                document.getElementsByClassName('table')[0].style.visibility = "visible";
+    <script> /* При необходимости можем скрпит в отдельный файл закинуть*/
+      var num = 0;
+      document.getElementById('leftNum').value = "";
+      function show() { /* Функция с анимациями бросков*/
+        var counter = document.getElementById('inputNum').value;
+        if (counter-num > 0) {
+          num++;
+          document.getElementById('next').style.visibility = 'inline';
+          document.getElementsByClassName('image')[0].style.visibility = "visible";
+          document.getElementsByClassName('image')[1].style.visibility = "visible";
+          document.getElementById('inputNum').disabled = true;
+          setTimeout(showTable, 1500);
+          setTimeout(hide, 1400);
 
-                setTimeout(hide, 1400);
-
-                function hide() {
-
-                    document.getElementsByClassName('image')[0].style.visibility = "hidden";
-                    document.getElementsByClassName('image')[1].style.visibility = "hidden";
 
 
-                }
+          document.getElementById('leftNum').value = counter - num;
+          if (counter - num==0){
+            setTimeout(ending, 1800);
+          }
+        }
+        else {
+          alert("Введите количество попыток большее нуля!");
+        }
 
-            }
-        </script>
+          function hide() {
+              document.getElementsByClassName('image')[0].style.visibility = "hidden";
+              document.getElementsByClassName('image')[1].style.visibility = "hidden";
+          }
+          function showTable() {
+              document.getElementById('results').style.visibility = "visible";
+
+              var tableRow = document.getElementById("results");
+              var row = tableRow.insertRow(1);
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              var cell3 = row.insertCell(2);
+              var cell4 = row.insertCell(3);
+              a = Math.round(Math.random());
+              b = Math.round(Math.random())
+              cell1.innerHTML = num;
+              if (a==1) {cell2.innerHTML = "ОРЁЛ";}
+              else{cell2.innerHTML = "РЕШКА";}
+              if (b==1) {cell3.innerHTML = "ОРЁЛ";}
+              else{cell3.innerHTML = "РЕШКА";}
+              if (a==b) {cell4.innerHTML = "Пользователь";}
+              else{cell4.innerHTML = "Соперник";}
+
+          }
+          function ending() {
+            document.getElementById('next').disabled = true;
+            alert("Игра закончена!")
+          }
+
+      }
+  </script>
 
 </body>
 </html>
